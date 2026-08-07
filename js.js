@@ -13,7 +13,6 @@ function createHeart() {
     heart.style.animationDuration = Math.random() * 4 + 5 + "s";
     heart.style.fontSize = Math.random() * 15 + 15 + "px";
 
-    // Click event on hearts to show alternating names
     heart.addEventListener("click", function(e) {
         e.stopPropagation();
         
@@ -46,38 +45,22 @@ function createHeart() {
 
 setInterval(createHeart, 400);
 
-// 2. Open Envelope Animation
-function openEnvelope() {
-    const env = document.getElementById("env");
-    if (env) {
-        env.classList.add("open");
-    }
-
-    setTimeout(() => {
-        const envWrapper = document.querySelector(".envelope-wrapper");
-        const letterContent = document.getElementById("letterContent");
-        
-        if (envWrapper) envWrapper.style.display = "none";
-        if (letterContent) letterContent.classList.remove("hidden");
-    }, 600);
-}
-
-// 3. Navigation Functions
+// 2. Navigation Functions (Transition Page 1 -> Page 2 -> Page 3)
 function next() {
-    document.getElementById("page1").classList.add("hidden");
-    document.getElementById("page2").classList.remove("hidden");
+    const p1 = document.getElementById("page1");
+    const p2 = document.getElementById("page2");
+    if (p1) p1.classList.add("hidden");
+    if (p2) p2.classList.remove("hidden");
 }
 
 function yes() {
-    document.getElementById("page2").classList.add("hidden");
-    document.getElementById("page3").classList.remove("hidden");
+    const p2 = document.getElementById("page2");
+    const p3 = document.getElementById("page3");
+    if (p2) p2.classList.add("hidden");
+    if (p3) p3.classList.remove("hidden");
 }
 
-// 4. Funny Fleeing Button (Bounded Inside Page Card Container)
-const noBtn = document.getElementById("no");
-const warningText = document.getElementById("warningText");
-let noClickCount = 0;
-
+// 3. Fleeing "La" Button Logic
 const funnyTexts = [
     "Awdi ya l9raya awdi... 😂",
     "Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️",
@@ -86,33 +69,32 @@ const funnyTexts = [
     "baraka 3lik baraka 3lik clicki flkhra😂"
 ];
 
+let noClickCount = 0;
+
 function moveButton(e) {
     if (e) {
         e.preventDefault();
         e.stopPropagation();
     }
+    
+    const noBtn = document.getElementById("no");
+    const warningText = document.getElementById("warningText");
+
     if (!noBtn) return;
 
-    const container = document.getElementById("page2") || noBtn.parentElement;
-    const containerRect = container.getBoundingClientRect();
+    // Calculate maximum screen bounds to keep the button inside viewport
+    const btnWidth = noBtn.offsetWidth || 80;
+    const btnHeight = noBtn.offsetHeight || 40;
 
-    const btnRect = noBtn.getBoundingClientRect();
-    const btnWidth = btnRect.width || 80;
-    const btnHeight = btnRect.height || 40;
+    const margin = 20;
+    const maxX = window.innerWidth - btnWidth - margin;
+    const maxY = window.innerHeight - btnHeight - margin;
 
-    const padding = 15;
-
-    const minX = containerRect.left + padding;
-    const maxX = containerRect.right - btnWidth - padding;
-
-    const minY = containerRect.top + padding;
-    const maxY = containerRect.bottom - btnHeight - padding;
-
-    const randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
-    const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+    const randomX = Math.max(margin, Math.floor(Math.random() * maxX));
+    const randomY = Math.max(margin, Math.floor(Math.random() * maxY));
 
     noBtn.style.position = "fixed";
-    noBtn.style.zIndex = "9999";
+    noBtn.style.zIndex = "99999";
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
 
@@ -122,28 +104,32 @@ function moveButton(e) {
     }
 }
 
-if (noBtn) {
-    noBtn.addEventListener("mouseover", moveButton);
-    noBtn.addEventListener("touchstart", moveButton, { passive: false });
-    noBtn.addEventListener("pointerdown", moveButton, { passive: false });
-    noBtn.addEventListener("click", moveButton);
-}
+// Attach event listeners when DOM content is loaded
+document.addEventListener("DOMContentLoaded", function() {
+    const noBtn = document.getElementById("no");
+    if (noBtn) {
+        noBtn.addEventListener("mouseenter", moveButton);
+        noBtn.addEventListener("mouseover", moveButton);
+        noBtn.addEventListener("touchstart", moveButton, { passive: false });
+        noBtn.addEventListener("click", moveButton);
+    }
 
-// 5. Audio Control (Play / Pause)
-const music = document.getElementById("music");
-const btn = document.getElementById("musicBtn");
-let playing = false;
+    // Music Control
+    const music = document.getElementById("music");
+    const btn = document.getElementById("musicBtn");
+    let playing = false;
 
-if (btn && music) {
-    btn.onclick = function() {
-        if (!playing) {
-            music.play();
-            btn.innerHTML = "⏸ Pause Music";
-            playing = true;
-        } else {
-            music.pause();
-            btn.innerHTML = "🎵 Play Music";
-            playing = false;
-        }
-    };
-}
+    if (btn && music) {
+        btn.onclick = function() {
+            if (!playing) {
+                music.play();
+                btn.innerHTML = "⏸ Pause Music";
+                playing = true;
+            } else {
+                music.pause();
+                btn.innerHTML = "🎵 Play Music";
+                playing = false;
+            }
+        };
+    }
+});
