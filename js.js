@@ -45,7 +45,7 @@ function createHeart() {
 
 setInterval(createHeart, 400);
 
-// 2. Navigation Functions (Transition Page 1 -> Page 2 -> Page 3)
+// 2. Navigation Functions
 function next() {
     const p1 = document.getElementById("page1");
     const p2 = document.getElementById("page2");
@@ -60,7 +60,7 @@ function yes() {
     if (p3) p3.classList.remove("hidden");
 }
 
-// 3. Fleeing "La" Button Logic
+// 3. Unlimited Fleeing "La" Button Logic
 const funnyTexts = [
     "Awdi ya l9raya awdi... 😂",
     "Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️",
@@ -82,19 +82,19 @@ function moveButton(e) {
 
     if (!noBtn) return;
 
-    // Calculate maximum screen bounds to keep the button inside viewport
-    const btnWidth = noBtn.offsetWidth || 80;
-    const btnHeight = noBtn.offsetHeight || 40;
+    // أبعاد مضمونة باش ما يخرجش على الشاشة نهائياً
+    const btnWidth = 80;
+    const btnHeight = 40;
 
-    const margin = 20;
-    const maxX = window.innerWidth - btnWidth - margin;
-    const maxY = window.innerHeight - btnHeight - margin;
+    const padding = 50; // مسافة أمان من جنبات الشاشة
+    const maxX = Math.max(10, window.innerWidth - btnWidth - padding);
+    const maxY = Math.max(10, window.innerHeight - btnHeight - padding);
 
-    const randomX = Math.max(margin, Math.floor(Math.random() * maxX));
-    const randomY = Math.max(margin, Math.floor(Math.random() * maxY));
+    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
 
     noBtn.style.position = "fixed";
-    noBtn.style.zIndex = "99999";
+    noBtn.style.zIndex = "999999";
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
 
@@ -104,13 +104,16 @@ function moveButton(e) {
     }
 }
 
-// Attach event listeners when DOM content is loaded
+// Attach event listeners safely
 document.addEventListener("DOMContentLoaded", function() {
     const noBtn = document.getElementById("no");
     if (noBtn) {
+        // حركات متعددة باش ما تقدرش تكليكي عليه أبدًا
         noBtn.addEventListener("mouseenter", moveButton);
         noBtn.addEventListener("mouseover", moveButton);
+        noBtn.addEventListener("mousemove", moveButton);
         noBtn.addEventListener("touchstart", moveButton, { passive: false });
+        noBtn.addEventListener("pointerdown", moveButton, { passive: false });
         noBtn.addEventListener("click", moveButton);
     }
 
