@@ -47,7 +47,7 @@ function yes() {
     document.getElementById("page3").classList.remove("hidden");
 }
 
-// 4. Strictly Bounded Fleeing Button
+// 4. Funny Fleeing Button (Bounded Inside Page Card Container)
 const noBtn = document.getElementById("no");
 const warningText = document.getElementById("warningText");
 let noClickCount = 0;
@@ -67,28 +67,35 @@ function moveButton(e) {
     }
     if (!noBtn) return;
 
-    // أبعاد الزر الفعلية
+    // الحصول على حدود البطاقة الرئيسية (Page 2)
+    const container = document.getElementById("page2") || noBtn.parentElement;
+    const containerRect = container.getBoundingClientRect();
+
+    // أبعاد الزر الدقيقة
     const btnRect = noBtn.getBoundingClientRect();
-    const btnWidth = btnRect.width || 100;
-    const btnHeight = btnRect.height || 45;
+    const btnWidth = btnRect.width || 80;
+    const btnHeight = btnRect.height || 40;
 
-    // مسافة أمان لمنع الخروج برا الشاشة
-    const padding = 25;
+    const padding = 15; // هامش أمان داخل البطاقة
 
-    // حساب الحدود القصوى المضمونة
-    const maxX = Math.max(padding, window.innerWidth - btnWidth - padding);
-    const maxY = Math.max(padding, window.innerHeight - btnHeight - padding);
+    // حساب الحدود داخل البطاقة المركزية فقط (وليس الشاشة كاملة)
+    const minX = containerRect.left + padding;
+    const maxX = containerRect.right - btnWidth - padding;
 
-    // مواقع عشوائية محصورة بين padding و maxX/maxY
-    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
-    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+    const minY = containerRect.top + padding;
+    const maxY = containerRect.bottom - btnHeight - padding;
 
-    // تطبيق الموقع
+    // توليد إحداثيات عشوائية محصورة فقط داخل الـ Card
+    const randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
+    const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+
+    // تطبيق الموقع بـ fixed وضمان بقائه فوق العناصر
     noBtn.style.position = "fixed";
+    noBtn.style.zIndex = "9999";
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
 
-    // تبديل الجملة المضحكة
+    // تبديل النص للجمل المضحكة
     if (warningText) {
         warningText.innerText = funnyTexts[noClickCount % funnyTexts.length];
         noClickCount++;
