@@ -4,101 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wa7d lmessage ❤️</title>
-
-    <!-- Link CSS -->
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
 
-    <!-- Floating Background Hearts Container -->
-    <div class="bg-hearts" id="bgHearts"></div>
+    <!-- Background Hearts -->
+    <div id="bgHearts"></div>
 
+    <!-- Music Control -->
     <button id="musicBtn">🎵 Play Music</button>
-
     <audio id="music" loop>
         <source src="de9a de9a.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="container">
-
-        <!-- Page 1: Envelope View -->
+    <!-- Main Container Card -->
+    <main class="card">
+        
+        <!-- Page 1: Salam / Envelope -->
         <div id="page1">
             <h1>Salam...</h1>
-            <p> mr7ba mr7ba💌</p>
-
-            <div class="envelope-wrapper" onclick="openEnvelope()">
-                <div class="envelope" id="env">
-                    <div class="envelope-flap"></div>
-                    <div class="envelope-heart">❤️</div>
-                </div>
-                <div class="click-hint">click 3la l'enveloppe ✨</div>
+            <p class="subtitle">mr7ba mr7ba💌</p>
+            
+            <div class="info-box" style="text-align: center; margin-bottom: 20px;">
+                <p>Ma3reftch wach ghadi tkoni z3mti o wsslti hna. Walakin 3arfani man9drch nder chi 7aja li matvalorisech dkchi li baghih, o ana aktar 7aja n9der nder 3liha effort howa l7ob li 3chto m3ak o li mazal kayn3chni flw9t li kantw7chk fiha wla kan7ss blw7da. kaytbdlo l7yot o sma o lard o youness yb9a youness li 3rfti ftass3a hbil dlkhla tal9ha tssr7 o molaha rbi fa in yanssorka allah fala ghaliba lak walakin ghlbtini ach ayder lwa7d hhhh mhm tl9i mezika o 3ichi la7dha</p>
             </div>
 
-            <div id="letterContent" class="hidden">
-                <p>
-                    Ma3reftch wach ghadi tkoni z3mti o wsslti hna
-                    <br>
-                    Walakin 3arfani man9drch nder chi 7aja li matvalorisech dkchi li baghih o ana aktar 7aja n9der nder 3liha effort howa l7ob li 3chto m3ak o li mazal kayn3chni flw9it li kantw7chk fiha wla kan7ss blw7da kaytbdlo l7yot o sma o lard o youness yb9a youness li 3rfti ftass3a hbil dlkhla tal9ha tssr7 o molaha rbi fa in yanssorka allah fala ghaliba lak walakin ghlbtini ach ayder lwa7d hhhh mhm tl9i mezika o 3ichi la7dha 
-                </p>
-                <button class="yes" onclick="next()">Nchouf 👀</button>
-            </div>
+            <button class="btn btn-primary" onclick="openEnvelope(); next();">Nchouf 👀</button>
         </div>
 
-        <!-- Page 2 -->
+        <!-- Page 2: Warnings & Options -->
         <div id="page2" class="hidden">
-    <h1>7adaaaaaaaaaari ⚠️</h1>
-    <p>MEMOES 😂</p>
+            <h2>7adaaaaaaaaari ⚠️</h2>
+            <p class="subtitle">MEMOES 😂</p>
 
-    <div class="memory">
-        ✨ Aw9at zwina:
-        <br>
-        a bla manfkrk(gali AI derha zerefni)
-    </div>
-
-    <div class="memory">
-        💔 Aw9at s3iba:
-        <br>
-        ta hia bla manfkrk(Tahia)
-    </div>
-
-    <!-- زدنا id=warningText هنام -->
-    <h2 id="warningText">Continue? 👀</h2>
-
-    <div class="btn-group">
-        <button class="yes" onclick="yes()">Nhdro ❤️</button>
-        <button class="no" id="no">La 😂</button>
-    </div>
-</div>
-
-        <!-- Page 3 -->
-        <div id="page3" class="hidden">
-            <div class="heart">❤️</div>
-            <h1>Daba b sra7a...</h1>
-            <p>
-                Bghit ngolk belli nti konti mn nass li kano momayazin f 7yati.
-                <br><br>
-               Ta7aja maktbda kif katssali walakin things can be fixed,o ever since 3rft bli ghanmchi n9ra fparis had l3am you've been all over my mind kantfkr nhar annoncit lk bli maghanb9ach flmghrib o goltili ghatmchi dor o tchof titiz o goltlk brbi dik la tour eiffel la chftha bla bik and i'm a man of my word ta la dozt 3lih blghalat nsonilk tchofih live b7al stream dial sa7bi shaoline fkick o 7erki m3ak chat
-                <br><br>
-                Ma bghitch NFRAD 3lik chi haja,3liha mn 79ek tcliki la 
-            </p>
-
-            <!-- Social Media Icons -->
-            <div class="social-links">
-                <a href="https://wa.me/212674260366?text=Slam,%209rit%20lmessage%20❤️" target="_blank" class="social-btn wa">
-                    💬 WhatsApp
-                </a>
-
-                <a href="https://www.instagram.com/youness___zerouali/" target="_blank" class="social-btn ig">
-                    📸 Instagram
-                </a>
+            <div class="info-box">
+                <h3>✨ Aw9at zwina</h3>
+                <p>a bla manfkrk 😉</p>
             </div>
 
-            <p class="eiffel">rj3i ldark ylh wlh ta lberd 3lik berra</p>
+            <div class="info-box">
+                <h3>💔 Aw9at s3iba</h3>
+                <p>ta hia bla manfkrk (Tahia)</p>
+            </div>
+
+            <div id="warningText">Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️</div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="yes()">Nhdro ❤️</button>
+                <button class="btn btn-secondary" id="no">La</button>
+            </div>
         </div>
 
-    </div>
+        <!-- Page 3: Final Message -->
+        <div id="page3" class="hidden">
+            <h2>Safi rj3na nhdro! 🎉❤️</h2>
+            <p class="subtitle">Makaynch la f هاد الميساج 😂</p>
+        </div>
 
-    <!-- Link JS -->
+    </main>
+
     <script src="js.js"></script>
 </body>
 </html>
