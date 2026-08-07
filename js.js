@@ -1,4 +1,6 @@
-// 1. Automatic Floating Hearts in Background
+// 1. Automatic Floating Hearts with Click Interaction
+let nameToggle = false;
+
 function createHeart() {
     const bgHearts = document.getElementById("bgHearts");
     if (!bgHearts) return;
@@ -11,10 +13,33 @@ function createHeart() {
     heart.style.animationDuration = Math.random() * 4 + 5 + "s";
     heart.style.fontSize = Math.random() * 15 + 15 + "px";
 
+    heart.addEventListener("click", function(e) {
+        e.stopPropagation();
+        
+        const textToDisplay = nameToggle ? "youness" : "Raouaa";
+        nameToggle = !nameToggle;
+
+        const popText = document.createElement("span");
+        popText.classList.add("heart-pop-text");
+        popText.innerText = textToDisplay;
+        popText.style.left = `${e.clientX}px`;
+        popText.style.top = `${e.clientY}px`;
+
+        document.body.appendChild(popText);
+
+        setTimeout(() => {
+            popText.remove();
+        }, 1200);
+
+        heart.remove();
+    });
+
     bgHearts.appendChild(heart);
 
     setTimeout(() => {
-        heart.remove();
+        if (heart.parentNode) {
+            heart.remove();
+        }
     }, 9000);
 }
 
@@ -67,35 +92,29 @@ function moveButton(e) {
     }
     if (!noBtn) return;
 
-    // الحصول على حدود البطاقة الرئيسية (Page 2)
     const container = document.getElementById("page2") || noBtn.parentElement;
     const containerRect = container.getBoundingClientRect();
 
-    // أبعاد الزر الدقيقة
     const btnRect = noBtn.getBoundingClientRect();
     const btnWidth = btnRect.width || 80;
     const btnHeight = btnRect.height || 40;
 
-    const padding = 15; // هامش أمان داخل البطاقة
+    const padding = 15;
 
-    // حساب الحدود داخل البطاقة المركزية فقط (وليس الشاشة كاملة)
     const minX = containerRect.left + padding;
     const maxX = containerRect.right - btnWidth - padding;
 
     const minY = containerRect.top + padding;
     const maxY = containerRect.bottom - btnHeight - padding;
 
-    // توليد إحداثيات عشوائية محصورة فقط داخل الـ Card
     const randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
     const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
 
-    // تطبيق الموقع بـ fixed وضمان بقائه فوق العناصر
     noBtn.style.position = "fixed";
     noBtn.style.zIndex = "9999";
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
 
-    // تبديل النص للجمل المضحكة
     if (warningText) {
         warningText.innerText = funnyTexts[noClickCount % funnyTexts.length];
         noClickCount++;
