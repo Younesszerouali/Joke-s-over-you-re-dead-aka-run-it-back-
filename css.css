@@ -8,7 +8,6 @@
 }
 
 body {
-    /* خلفية متدرجة باللون الأحمر الداكن الفاخر */
     background: radial-gradient(circle at center, #2b030a 0%, #0d0104 100%);
     min-height: 100vh;
     display: flex;
@@ -19,7 +18,6 @@ body {
     position: relative;
 }
 
-/* Background Hearts Floating Area */
 #bgHearts {
     position: fixed;
     inset: 0;
@@ -50,7 +48,6 @@ body {
     }
 }
 
-/* Clickable Heart Text Effects (Raouaa / youness) */
 .heart-pop-text {
     position: fixed;
     transform: translate(-50%, -50%);
@@ -78,7 +75,6 @@ body {
     }
 }
 
-/* Top Music Button */
 #musicBtn {
     position: fixed;
     top: 24px;
@@ -104,16 +100,17 @@ body {
     box-shadow: 0 12px 40px 0 rgba(255, 30, 60, 0.35);
 }
 
-/* Main Card Container */
 .card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 50, 80, 0.2);
     border-radius: 28px;
-    padding: 40px;
+    padding: 35px 30px;
     width: 90%;
     max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
     text-align: center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7),
                 inset 0 1px 1px rgba(255, 255, 255, 0.1);
@@ -122,11 +119,19 @@ body {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Scrollbar Styling inside Card */
+.card::-webkit-scrollbar {
+    width: 5px;
+}
+.card::-webkit-scrollbar-thumb {
+    background: rgba(255, 50, 80, 0.4);
+    border-radius: 10px;
+}
+
 .hidden {
     display: none !important;
 }
 
-/* Typography & Headings */
 h1, h2 {
     font-size: 1.8rem;
     font-weight: 800;
@@ -143,12 +148,11 @@ h1, h2 {
     margin-bottom: 24px;
 }
 
-/* Custom Content Boxes */
 .info-box {
     background: rgba(0, 0, 0, 0.35);
     border: 1px solid rgba(255, 50, 80, 0.15);
     border-radius: 18px;
-    padding: 16px 20px;
+    padding: 18px 20px;
     margin-bottom: 16px;
     text-align: left;
 }
@@ -165,7 +169,7 @@ h1, h2 {
 .info-box p {
     font-size: 0.88rem;
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 #warningText {
@@ -179,7 +183,6 @@ h1, h2 {
     margin: 16px 0;
 }
 
-/* Buttons Styling */
 .btn-group {
     display: flex;
     gap: 16px;
@@ -221,22 +224,36 @@ h1, h2 {
     transition: left 0.15s ease-out, top 0.15s ease-out;
 }
 
-/* Envelope Styles */
-.envelope-wrapper {
-    cursor: pointer;
-    margin: 30px auto;
-    width: 120px;
-    height: 80px;
-    background: linear-gradient(135deg, #d60021, #ff3355);
-    border-radius: 12px;
+.social-links {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-    box-shadow: 0 15px 35px rgba(214, 0, 33, 0.4);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
 }
 
-.envelope-wrapper:hover {
-    transform: scale(1.1) rotate(-3deg);
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-btn.whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.social-btn.instagram {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
