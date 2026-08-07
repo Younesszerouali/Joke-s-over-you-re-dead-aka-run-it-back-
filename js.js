@@ -82,16 +82,12 @@ function moveButton(e) {
 
     if (!noBtn) return;
 
-    // أبعاد مضمونة باش ما يخرجش على الشاشة نهائياً
-    const btnWidth = 80;
-    const btnHeight = 40;
+    // حساب المسافة المتاحة فـ الشاشة كاملة بلا ما يخرج برا
+    const w = window.innerWidth - 120;
+    const h = window.innerHeight - 80;
 
-    const padding = 50; // مسافة أمان من جنبات الشاشة
-    const maxX = Math.max(10, window.innerWidth - btnWidth - padding);
-    const maxY = Math.max(10, window.innerHeight - btnHeight - padding);
-
-    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
-    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+    const randomX = Math.floor(Math.random() * w) + 20;
+    const randomY = Math.floor(Math.random() * h) + 20;
 
     noBtn.style.position = "fixed";
     noBtn.style.zIndex = "999999";
@@ -104,16 +100,13 @@ function moveButton(e) {
     }
 }
 
-// Attach event listeners safely
+// Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
     const noBtn = document.getElementById("no");
     if (noBtn) {
-        // حركات متعددة باش ما تقدرش تكليكي عليه أبدًا
         noBtn.addEventListener("mouseenter", moveButton);
         noBtn.addEventListener("mouseover", moveButton);
-        noBtn.addEventListener("mousemove", moveButton);
         noBtn.addEventListener("touchstart", moveButton, { passive: false });
-        noBtn.addEventListener("pointerdown", moveButton, { passive: false });
         noBtn.addEventListener("click", moveButton);
     }
 
