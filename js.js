@@ -55,9 +55,9 @@ let noClickCount = 0;
 const funnyTexts = [
     "Awdi ya l9raya awdi... 😂",
     "Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️",
-    "Wlh ma ghatchدّيني! 😂",
-    "Ghir 9lly fia z3ma? 👀",
-    "Safiy ghlbtini, rj3i nhdro hhhh 😂"
+    "hachofi wkan 😂",
+    "galk chrab ysseker yak hadi la o clickiti 3liha 👀",
+    "baraka 3lik baraka 3lik clicki flkhra😂"
 ];
 
 function moveButton(e) {
