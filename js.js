@@ -47,7 +47,7 @@ function yes() {
     document.getElementById("page3").classList.remove("hidden");
 }
 
-// 4. Funny Fleeing Button (Fix for first click overflow)
+// 4. Strictly Bounded Fleeing Button
 const noBtn = document.getElementById("no");
 const warningText = document.getElementById("warningText");
 let noClickCount = 0;
@@ -67,26 +67,26 @@ function moveButton(e) {
     }
     if (!noBtn) return;
 
-    // أبعاد الزر الدقيقة
+    // أبعاد الزر الفعلية
     const btnRect = noBtn.getBoundingClientRect();
-    const btnWidth = btnRect.width || noBtn.offsetWidth || 80;
-    const btnHeight = btnRect.height || noBtn.offsetHeight || 40;
+    const btnWidth = btnRect.width || 100;
+    const btnHeight = btnRect.height || 45;
 
-    // مسافة أمان من حوافي الشاشة (20px من كل جهة)
-    const padding = 20;
+    // مسافة أمان لمنع الخروج برا الشاشة
+    const padding = 25;
 
-    // أقصى إحداثيات مسموح بها داخل الشاشة المرئية
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+    // حساب الحدود القصوى المضمونة
+    const maxX = Math.max(padding, window.innerWidth - btnWidth - padding);
+    const maxY = Math.max(padding, window.innerHeight - btnHeight - padding);
 
-    // عشوائية حتمية داخل نطاق الشاشة فقط
+    // مواقع عشوائية محصورة بين padding و maxX/maxY
     const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
     const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
 
-    // تطبيق الـ Position بشكل مباشر وآمن
+    // تطبيق الموقع
     noBtn.style.position = "fixed";
-    noBtn.style.left = `${Math.max(padding, randomX)}px`;
-    noBtn.style.top = `${Math.max(padding, randomY)}px`;
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
 
     // تبديل الجملة المضحكة
     if (warningText) {
@@ -96,7 +96,6 @@ function moveButton(e) {
 }
 
 if (noBtn) {
-    // الأحداث للبيسي والموبايل
     noBtn.addEventListener("mouseover", moveButton);
     noBtn.addEventListener("touchstart", moveButton, { passive: false });
     noBtn.addEventListener("pointerdown", moveButton, { passive: false });
