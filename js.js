@@ -60,7 +60,7 @@ function yes() {
     if (p3) p3.classList.remove("hidden");
 }
 
-// 3. Unlimited Fleeing "La" Button Logic
+// 3. Fleeing "La" Button Logic
 const funnyTexts = [
     "Awdi ya l9raya awdi... 😂",
     "Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️",
@@ -82,7 +82,6 @@ function moveButton(e) {
 
     if (!noBtn) return;
 
-    // حساب المسافة المتاحة فـ الشاشة كاملة بلا ما يخرج برا
     const w = window.innerWidth - 120;
     const h = window.innerHeight - 80;
 
@@ -100,7 +99,6 @@ function moveButton(e) {
     }
 }
 
-// Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
     const noBtn = document.getElementById("no");
     if (noBtn) {
@@ -110,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function() {
         noBtn.addEventListener("click", moveButton);
     }
 
-    // Music Control
     const music = document.getElementById("music");
     const btn = document.getElementById("musicBtn");
     let playing = false;
