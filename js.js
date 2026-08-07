@@ -13,6 +13,7 @@ function createHeart() {
     heart.style.animationDuration = Math.random() * 4 + 5 + "s";
     heart.style.fontSize = Math.random() * 15 + 15 + "px";
 
+    // Click event on hearts to show alternating names
     heart.addEventListener("click", function(e) {
         e.stopPropagation();
         
