@@ -45,22 +45,7 @@ function createHeart() {
 
 setInterval(createHeart, 400);
 
-// 2. Navigation Functions
-function next() {
-    const p1 = document.getElementById("page1");
-    const p2 = document.getElementById("page2");
-    if (p1) p1.classList.add("hidden");
-    if (p2) p2.classList.remove("hidden");
-}
-
-function yes() {
-    const p2 = document.getElementById("page2");
-    const p3 = document.getElementById("page3");
-    if (p2) p2.classList.add("hidden");
-    if (p3) p3.classList.remove("hidden");
-}
-
-// 3. Fleeing "La" Button Logic
+// 2. Fleeing "La" Button Logic
 const funnyTexts = [
     "Awdi ya l9raya awdi... 😂",
     "Aji fin mchia? Wa klicki 'Nhdro' 🙄❤️",
@@ -85,8 +70,8 @@ function moveButton(e) {
     const w = window.innerWidth - 120;
     const h = window.innerHeight - 80;
 
-    const randomX = Math.floor(Math.random() * w) + 20;
-    const randomY = Math.floor(Math.random() * h) + 20;
+    const randomX = Math.floor(Math.random() * Math.max(10, w)) + 20;
+    const randomY = Math.floor(Math.random() * Math.max(10, h)) + 20;
 
     noBtn.style.position = "fixed";
     noBtn.style.zIndex = "999999";
@@ -99,7 +84,28 @@ function moveButton(e) {
     }
 }
 
+// Attach all DOM Event Listeners after document loads
 document.addEventListener("DOMContentLoaded", function() {
+    
+    // Button Nchouf (Page 1 -> Page 2)
+    const btnNchouf = document.getElementById("btnNchouf");
+    if (btnNchouf) {
+        btnNchouf.onclick = function() {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page2").classList.remove("hidden");
+        };
+    }
+
+    // Button Nhdro (Page 2 -> Page 3)
+    const btnNhdro = document.getElementById("btnNhdro");
+    if (btnNhdro) {
+        btnNhdro.onclick = function() {
+            document.getElementById("page2").classList.add("hidden");
+            document.getElementById("page3").classList.remove("hidden");
+        };
+    }
+
+    // Fleeing Button "La" Events
     const noBtn = document.getElementById("no");
     if (noBtn) {
         noBtn.addEventListener("mouseenter", moveButton);
@@ -108,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         noBtn.addEventListener("click", moveButton);
     }
 
+    // Music Control
     const music = document.getElementById("music");
     const btn = document.getElementById("musicBtn");
     let playing = false;
@@ -115,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (btn && music) {
         btn.onclick = function() {
             if (!playing) {
-                music.play();
+                music.play().catch(() => {});
                 btn.innerHTML = "⏸ Pause Music";
                 playing = true;
             } else {
